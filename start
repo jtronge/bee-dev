@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. ./CONF
+
+docker run --privileged --publish=5050:5050 \
+                        --publish=5000:5000 \
+                        --publish=7687:7687 \
+                        --publish=7474:7474 \
+                        -v $DATA:/data:rw bee-dev \
+                        > $LOG 2>&1 &
+
+# Install initial BEE dependencies if necessary
+if ! [ -d $DATA/venv ]
+then
+    echo -n "Install BEE dependencies..."
+    CONTAINER_ID=$(posman ps | head -n 2 | tail -n 1 | cut -d' ' -f1)
+    docker exec -it $CONTAINER_ID /bin/bash /bee-setup > bee-setup.log 2>&1 || exit 1
+    echo "finished"
+fi

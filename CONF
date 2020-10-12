@@ -1,0 +1,9 @@
+#!/bin/sh
+# BEE Development Configuration Variables
+#
+# Directory to be mounted rw at /data
+DATA=/mnt/data/BEE/
+# Log file relative to the host system
+LOG=/mnt/data/BEE/log/startup.log
+# Repository directy _relative_ to the directy mounted at /data
+BEE_REPO_DIR=BEE_Private

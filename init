@@ -1,0 +1,22 @@
+#!/bin/sh
+
+. /CONF
+
+# Set the hostname of the container in the slurm.conf file (otherwise slurmd and
+# slurmctld will refuse to start)
+sed -e "s/\${hostname}/$(hostname)/g" /etc/slurm.conf.template > /etc/slurm.conf
+
+# Create a new munge.key
+create-munge-key -f
+
+dockerd >> /var/log/dockerd.log &
+munged -f -F >> /var/log/munged.conf &
+
+sleep 1
+
+slurmctld -D >> /var/log/slurmctld.log &
+slurmd -D >> /var/log/slurmd.log &
+
+# Now wait for everything to finish
+wait
+
