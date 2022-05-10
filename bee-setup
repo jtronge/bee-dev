@@ -3,7 +3,6 @@
 . /CONF
 
 # Setup BEE dependencies and environment.
-# TODO: This is quite messy and needs to be cleaned up somehow
 if ! [ -d /data/venv ]
 then
     # Create a virtualenv in /data/venv if the /data/venv directory does not
@@ -12,15 +11,6 @@ then
     . /data/venv/bin/activate
     pip install poetry
     cd /data/$BEE_REPO_DIR
+    poetry update
     poetry install
-    poetry run sh <<EOF
-pip install Cython
-cd /tmp
-git clone https://github.com/PySlurm/pyslurm.git
-cd pyslurm
-git checkout 19.05.0
-python setup.py build
-python setup.py install
-pip list
-EOF
 fi

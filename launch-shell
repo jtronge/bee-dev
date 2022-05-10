@@ -1,8 +1,0 @@
-#!/bin/sh
-# Use this to launch a shell into the container
-
-. ./CONF
-
-CONTAINER_ID=$(docker ps | head -n 2 | tail -n 1 | cut -d' ' -f1)
-docker exec -it $CONTAINER_ID /bin/bash --rcfile /rcfile
-

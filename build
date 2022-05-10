@@ -1,4 +1,8 @@
 #!/bin/sh
 
-docker build -t bee-dev .
+. ./CONF
 
+# needs to be built with docker due to slurm and munge install
+docker build -t bee-dev container/
+$CHARLIECLOUD_PATH/ch-convert -i docker -o dir bee-dev bee-dev
+chown -R $BEE_USER:$BEE_GROUP bee-dev

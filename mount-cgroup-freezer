@@ -1,8 +1,0 @@
-#!/bin/sh
-# Mount cgroups manually for running Slurm
-
-if ! [ -d /sys/fs/cgroup/freezer ]; then
-	mkdir -p /sys/fs/cgroup/freezer
-	mount -t cgroup -ofreezer freezer /sys/fs/cgroup/freezer
-	mkdir /sys/fs/cgroup/freezer/0
-fi

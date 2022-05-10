@@ -1,8 +1,0 @@
-#!/bin/sh
-# cd into and initialize the environment
-. /etc/profile
-. /CONF
-cd /data/$BEE_REPO_DIR
-# Activate the virtualenv
-. /data/venv/bin/activate
-poetry shell
