@@ -1,0 +1,3 @@
+. /etc/profile
+export PATH=/sbin:/usr/sbin:$PATH
+. ./venv/bin/activate

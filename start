@@ -2,27 +2,4 @@
 
 . ./CONF
 
-ch-run bee-dev -c $DATA_PATH /init
-
-#. ./CONF
-#
-#docker run --privileged --publish=5050:5050 \
-#                        --publish=5000:5000 \
-#                        --publish=7687:7687 \
-#                        --publish=7474:7474 \
-#                        -v $DATA:/data:rw bee-dev:latest \
-#                        > $LOG 2>&1 &
-#
-## Install initial BEE dependencies if necessary
-#if ! [ -d $DATA/venv ]
-#then
-#    sleep 1
-#    # echo -n "Install BEE dependencies..."
-#    CONTAINER_ID=$(docker ps | head -n 2 | tail -n 1 | cut -d' ' -f1)
-#    printf "$CONTAINER_ID\n"
-#    # docker exec -it $CONTAINER_ID /bin/bash /bee-setup > bee-setup.log 2>&1 || exit 1
-#    docker exec -it $CONTAINER_ID /bin/bash -c "chown -R bee:users /data" || exit 1
-#    docker exec --user bee -it $CONTAINER_ID /bin/bash /bee-setup || exit 1
-#    # docker exec --user bee -it $CONTAINER_ID /bin/bash -c "ls -lh /" || exit 1
-#    # echo "finished"
-#fi
+ch-run -w bee-dev -c $DATA_PATH /init
